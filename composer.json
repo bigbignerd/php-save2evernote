@@ -1,0 +1,6 @@
+{
+	
+    "require": {
+        "evernote/evernote-cloud-sdk-php": "^2.0"
+    }
+}
