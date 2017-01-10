@@ -7,6 +7,7 @@ class EvernoteModel
 	protected $token;
 	protected $tag; 
 	protected $notebook;
+	protected $note_prefix;
 
 	protected $sandbox = false;
 	protected $china   = false;
@@ -16,6 +17,7 @@ class EvernoteModel
 		$this->token = $config['token'];
 		$this->tag   = $config['tag'];
 		$this->notebook = $config['notebook'];
+		$this->note_prefix = $config['note_prefix'];
 	}
 	/**
 	 * get base client instance
@@ -52,7 +54,7 @@ class EvernoteModel
 	public function noteTitle()
 	{
 		date_default_timezone_set('PRC');
-		return 'Bignerd record '.date('Y/m').' 第'.Tool::weekIndexOfMonth().'周';
+		return $this->note_prefix.' '.date('Y/m').' 第'.Tool::weekIndexOfMonth().'周';
 	}
 	/**
 	 * 判断本周的笔记是否已经创建
