@@ -1,6 +1,7 @@
 <?php
 require 'vendor/autoload.php';
 require 'Tool.php';
+require 'Session_Cli.php';
 
 class EvernoteModel
 {
@@ -12,12 +13,16 @@ class EvernoteModel
 	protected $sandbox = false;
 	protected $china   = false;
 
+	protected $instance = null;
+
 	public function __construct($config)
 	{
 		$this->token = $config['token'];
 		$this->tag   = $config['tag'];
 		$this->notebook = $config['notebook'];
 		$this->note_prefix = $config['note_prefix'];
+
+		$this->instance = Session_Cli::getInstance();
 	}
 	/**
 	 * get base client instance
@@ -63,8 +68,6 @@ class EvernoteModel
 	 */
 	public function noteExist()
 	{
-		session_start();
-
 		$guid = '';
 		$title = $this->noteTitle();
 
@@ -202,13 +205,17 @@ class EvernoteModel
 	{
 		$title = $this->noteTitle();
 		$sessionKey = 'guid_'.$title;
-		return array_key_exists($sessionKey, $_SESSION)? $_SESSION[$sessionKey] : '';
+
+		return $this->instance->get($sessionKey);
 	}
 	public function setSession($guid)
 	{
 		$title = $this->noteTitle();
 		$sessionKey = 'guid_'.$title;
-		$_SESSION[$sessionKey] = $guid;
+
+		$this->instance->set($sessionKey, $guid);
+
+		return true;
 	}
 }
 ?>
