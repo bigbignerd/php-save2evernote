@@ -43,6 +43,7 @@ class EvernoteModel
 	{
 		$title = $this->noteTitle();
 		$guid = $this->noteExist();
+
 		$content = Tool::handleSaveContent($content);
 		
 		if($guid){
@@ -99,7 +100,8 @@ class EvernoteModel
 		/**
 		 * The notebook to search in
 		 */
-		$notebook = new \Evernote\Model\Notebook($notebookName);
+		$notebook = new \Evernote\Model\Notebook();
+		$notebook->guid = $this->getNotebookGuid($notebookName);
 
 		/**
 		 * The scope of the search
@@ -166,7 +168,8 @@ class EvernoteModel
 		$note->content = new \Evernote\Model\PlainTextNoteContent($content);
 		$note->tagNames = $tag;
 
-		$notebook = new \Evernote\Model\Notebook('mind');
+		$notebook = new \Evernote\Model\Notebook();
+		$notebook->guid = $this->getNotebookGuid($this->notebook);
 		$saved = $client->uploadNote($note, $notebook);
 
 		if($guid = $saved->getGuid()){
@@ -200,6 +203,19 @@ class EvernoteModel
 
 		echo ($updated)? '更新成功.' : '更新失败.';
 
+	}
+	public function getNotebookGuid($notebookName)
+	{
+		$client = $this->getClient();
+		$notebooks = $client->listNotebooks();
+		$guid = '';
+		foreach ($notebooks as $notebook) {
+			if($notebook->name == $notebookName){
+				$guid = $notebook->guid;
+				break;
+			}
+		}
+		return $guid;
 	}
 	public function getSession()
 	{

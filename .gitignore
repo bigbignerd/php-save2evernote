@@ -1,1 +1,6 @@
 session
+.idea
+.swp
+composer.lock
+.DS_Store
+phpunit.xml
