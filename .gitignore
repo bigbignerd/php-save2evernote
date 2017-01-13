@@ -4,3 +4,4 @@ session
 composer.lock
 .DS_Store
 phpunit.xml
+config.php
