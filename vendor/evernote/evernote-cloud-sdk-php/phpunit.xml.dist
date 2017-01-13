@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit backupGlobals="false"
+         backupStaticAttributes="false"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         processIsolation="false"
+         stopOnFailure="false"
+         syntaxCheck="false"
+         bootstrap="./tests/bootstrap.php"
+        >
+    <php>
+        <!-- TOKENS -->
+        <server name="BUSINESS_USER_TOKEN" value="" />
+        <server name="BUSINESS_ADMIN_TOKEN" value="" />
+        <server name="REGULAR_USER_TOKEN" value="" />
+    </php>
+    <testsuites>
+        <testsuite name="Evernote Test Suite">
+            <directory>./tests/</directory>
+        </testsuite>
+    </testsuites>
+    <filter>
+        <whitelist>
+            <directory>./src/Evernote/</directory>
+        </whitelist>
+    </filter>
+</phpunit>
