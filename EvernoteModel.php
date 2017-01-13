@@ -43,7 +43,7 @@ class EvernoteModel
 	{
 		$title = $this->noteTitle();
 		$guid = $this->noteExist();
-
+		
 		$content = Tool::handleSaveContent($content);
 		
 		if($guid){
