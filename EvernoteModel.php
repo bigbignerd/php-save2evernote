@@ -31,7 +31,7 @@ class EvernoteModel
 	 */
 	protected function getClient()
 	{
-		$client = new \Evernote\Client($this->token, $this->sandbox, null, null, $this->china);
+		$client = new Evernote\Client($this->token, $this->sandbox, null, null, $this->china);
 		return $client;
 	}
 	/**
