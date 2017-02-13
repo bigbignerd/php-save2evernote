@@ -1,7 +1,9 @@
 <?php
-require 'vendor/autoload.php';
-require 'Tool.php';
-require 'Session_Cli.php';
+defined('BASE_PATH') or define("BASE_PATH", dirname(__FILE__));
+
+require (BASE_PATH.'/vendor/autoload.php');
+require (BASE_PATH.'/Tool.php');
+require (BASE_PATH.'/Session_Cli.php');
 
 class EvernoteModel
 {
@@ -31,7 +33,7 @@ class EvernoteModel
 	 */
 	protected function getClient()
 	{
-		$client = new Evernote\Client($this->token, $this->sandbox, null, null, $this->china);
+		$client = new \Evernote\Client($this->token, $this->sandbox, null, null, $this->china);
 		return $client;
 	}
 	/**
